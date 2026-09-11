@@ -113,6 +113,7 @@ button { font: inherit; cursor: pointer; }
 .project-type { max-width: 130px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.35; text-align: right; }
 .footer-contact { display: flex; flex-direction: column; gap: .75rem; margin-top: 6rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
 .footer-contact a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.footer-email { margin-top: 3rem; }
 
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 @media (min-width: 640px) {
@@ -135,39 +136,44 @@ button { font: inherit; cursor: pointer; }
 @media (max-width: 639px) {
   .site-header { padding: .85rem 1rem; }
   .brand { min-width: 0; gap: .45rem; }
-  .brand-name { max-width: calc(100vw - 7rem); overflow: hidden; font-size: clamp(17px, 5.2vw, 21px); text-overflow: ellipsis; white-space: nowrap; }
+  .brand-name { max-width: calc(100vw - 9.5rem); overflow: hidden; font-size: clamp(16px, 4.8vw, 20px); text-overflow: ellipsis; white-space: nowrap; }
   .brand-mark { flex: 0 0 auto; font-size: 22px; }
-  .language-switcher { margin-right: .65rem; }
-  .language-button { padding: .4rem .55rem; }
+  .language-switcher { margin-right: .35rem; }
+  .language-button { min-height: 38px; padding: .4rem .55rem; font-size: 11px; }
+  .mobile-toggle { align-items: center; justify-content: center; width: 42px; height: 42px; margin: -3px -5px -3px 0; border-radius: 50%; background: rgb(0 0 0 / 20%); }
+  .mobile-toggle span { width: 21px; }
   .hero { min-height: 100svh; padding: 0 1rem 2rem; }
   .hero-video { object-position: 62% center; }
-  .hero-content { width: 100%; max-width: none; }
+  .hero-content { width: 100%; max-width: none; text-align: left; }
   .warp-text { min-height: 4.4rem; margin-bottom: .85rem; }
-  .hero-intro, .hero-description { font-size: clamp(17px, 5vw, 22px); }
-  .hero-intro { margin-bottom: 1rem; }
-  .hero-description { min-height: 4.8em; margin-bottom: 1rem; }
-  .actions { gap: 0; }
-  .pill { max-width: 100%; padding: .55em .85rem; font-size: 13px; white-space: normal; text-align: center; }
-  .pill--outline { width: 100%; }
-  .curved-input { height: 86px; margin-top: .2rem; }
+  .warp-text span, .warp-text::after { font-size: clamp(2.65rem, 12vw, 4.2rem); }
+  .hero-intro, .hero-description { max-width: 100%; font-size: clamp(17px, 5vw, 22px); text-align: left; }
+  .hero-intro { margin: 0 0 .7rem; }
+  .hero-description { min-height: 4.8em; margin: 0 0 .75rem; }
+  .actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45rem; }
+  .pill { width: 100%; min-height: 42px; margin: 0; padding: .55rem .6rem; font-size: 12px; line-height: 1.2; white-space: normal; text-align: center; }
+  .pill--outline { grid-column: 1 / -1; }
+  .curved-input { height: 86px; margin-top: .6rem; }
   .curved-input__shell { stroke-width: 58; }
   .curved-input__ring { stroke-width: 66; }
   .curved-input__field { inset: 0 98px 0 12px; width: calc(100% - 110px); }
-  .curved-input__button { right: 14px; min-width: 92px; padding: .58rem .55rem; font-size: 11px; }
+  .curved-input__field { padding-inline: .7rem; font-size: 13px; }
+  .curved-input__button { right: 14px; min-width: 94px; min-height: 40px; padding: .58rem .5rem; font-size: 11px; }
   .work { padding: 4rem 1rem; }
-  .work-head { gap: 1rem; margin-bottom: 2.25rem; }
+  .work-head { gap: .75rem; margin-bottom: 2.25rem; text-align: left; }
   .eyebrow { font-size: 10px; letter-spacing: .12em; }
   .work-title { font-size: clamp(42px, 13vw, 64px); }
-  .work-intro { font-size: 15px; }
+  .work-intro { max-width: 100%; font-size: 15px; text-align: left; }
   .projects { gap: 2.25rem; }
   .project-preview { aspect-ratio: 5 / 4; margin-bottom: 1rem; }
   .project-preview::after { inset: .85rem; }
   .project-number { top: .85rem; left: .85rem; }
   .project-arrow { right: .85rem; bottom: .85rem; font-size: 26px; }
   .project-meta { flex-direction: column; gap: .45rem; }
-  .project-title { font-size: 19px; }
+  .project-title { font-size: 19px; line-height: 1.1; }
   .project-type { max-width: none; text-align: left; }
   .footer-contact { margin-top: 4rem; }
+  .footer-email { margin-top: 2rem; }
 }
 @media (max-width: 380px) {
   .hero { padding-bottom: 1.5rem; }

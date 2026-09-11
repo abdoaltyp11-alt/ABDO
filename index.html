@@ -52,7 +52,7 @@
 
     <main id="top">
       <section class="hero">
-        <video class="hero-video" muted playsinline preload="auto" aria-hidden="true"></video>
+        <video class="hero-video" muted autoplay loop playsinline preload="auto" aria-hidden="true"></video>
         <div class="hero-shade" aria-hidden="true"></div>
         <div class="hero-content">
           <div class="warp-text" data-warp-text="Bend the moment" data-label="Bend the moment" role="img" aria-label="Bend the moment">
@@ -70,21 +70,6 @@
               <span aria-hidden="true">▣</span>
             </button>
           </div>
-          <form class="curved-input" data-curved-input>
-            <div class="curved-input__visual" aria-hidden="true">
-              <svg class="curved-input__svg" viewBox="0 0 450 92" preserveAspectRatio="none">
-                <defs>
-                  <path id="curved-email-path" d="M 24 62 Q 225 10 426 62" />
-                </defs>
-                <path class="curved-input__ring" d="M 24 62 Q 225 10 426 62" />
-                <path class="curved-input__shell" d="M 24 62 Q 225 10 426 62" />
-                <text class="curved-input__placeholder"><textPath href="#curved-email-path" startOffset="50%" data-email-placeholder>Enter your email</textPath></text>
-                <text class="curved-input__value"><textPath href="#curved-email-path" startOffset="50%" data-email-value></textPath></text>
-              </svg>
-            </div>
-            <input class="curved-input__field" type="email" name="email" autocomplete="email" placeholder="Enter your email" data-email-input aria-label="Enter your email">
-            <button class="curved-input__button" type="submit"><span class="curved-input__mail-icon" aria-hidden="true">✉</span><span data-email-button>Get Started</span><span aria-hidden="true">↗</span></button>
-          </form>
         </div>
       </section>
 
@@ -117,6 +102,21 @@
             <span data-i18n="availability">Available for thoughtful digital projects.</span>
             <a href="mailto:abdoaltyp8@gmail.com">abdoaltyp8@gmail.com</a>
           </div>
+          <form class="curved-input footer-email" data-curved-input>
+            <div class="curved-input__visual" aria-hidden="true">
+              <svg class="curved-input__svg" viewBox="0 0 450 92" preserveAspectRatio="none">
+                <defs>
+                  <path id="curved-email-path" d="M 24 62 Q 225 10 426 62" />
+                </defs>
+                <path class="curved-input__ring" d="M 24 62 Q 225 10 426 62" />
+                <path class="curved-input__shell" d="M 24 62 Q 225 10 426 62" />
+                <text class="curved-input__placeholder"><textPath href="#curved-email-path" startOffset="50%" data-email-placeholder>Enter your email</textPath></text>
+                <text class="curved-input__value"><textPath href="#curved-email-path" startOffset="50%" data-email-value></textPath></text>
+              </svg>
+            </div>
+            <input class="curved-input__field" type="email" name="email" autocomplete="email" placeholder="Enter your email" data-email-input aria-label="Enter your email">
+            <button class="curved-input__button" type="submit"><span class="curved-input__mail-icon" aria-hidden="true">✉</span><span data-email-button>Get Started</span><span aria-hidden="true">↗</span></button>
+          </form>
         </div>
       </section>
     </main>

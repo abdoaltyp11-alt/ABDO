@@ -241,48 +241,59 @@ document.querySelectorAll('img').forEach((image) => {
 
 if (video) {
   video.src = VIDEO_URL;
-  let previousX = null;
-  let targetTime = null;
-  let queuedTime = null;
-  let seeking = false;
-
-  const seekNext = () => {
-    seeking = false;
-    if (queuedTime !== null) {
-      video.currentTime = queuedTime;
-      queuedTime = null;
-      seeking = true;
-    }
+  video.load();
+  const startVideo = () => {
+    video.play().catch(() => {
+      // Some mobile browsers wait for a user gesture before allowing playback.
+    });
   };
+  video.addEventListener('loadeddata', startVideo, { once: true });
+  startVideo();
 
-  const smoothSeek = () => {
-    if (targetTime !== null && Number.isFinite(video.duration)) {
-      const distance = targetTime - video.currentTime;
-      if (Math.abs(distance) > 0.01) {
-        const nextTime = video.currentTime + distance * 0.1;
-        if (seeking) queuedTime = nextTime;
-        else {
-          video.currentTime = nextTime;
-          seeking = true;
+  if (window.matchMedia('(min-width: 768px) and (pointer: fine)').matches) {
+    let previousX = null;
+    let targetTime = null;
+    let queuedTime = null;
+    let seeking = false;
+
+    const seekNext = () => {
+      seeking = false;
+      if (queuedTime !== null) {
+        video.currentTime = queuedTime;
+        queuedTime = null;
+        seeking = true;
+      }
+    };
+
+    const smoothSeek = () => {
+      if (targetTime !== null && Number.isFinite(video.duration)) {
+        const distance = targetTime - video.currentTime;
+        if (Math.abs(distance) > 0.01) {
+          const nextTime = video.currentTime + distance * 0.1;
+          if (seeking) queuedTime = nextTime;
+          else {
+            video.currentTime = nextTime;
+            seeking = true;
+          }
         }
       }
-    }
-    window.requestAnimationFrame(smoothSeek);
-  };
+      window.requestAnimationFrame(smoothSeek);
+    };
 
-  video.addEventListener('seeked', seekNext);
-  window.addEventListener('mousemove', (event) => {
-    if (!Number.isFinite(video.duration)) return;
-    if (previousX === null) {
+    video.addEventListener('seeked', seekNext);
+    window.addEventListener('mousemove', (event) => {
+      if (!Number.isFinite(video.duration)) return;
+      if (previousX === null) {
+        previousX = event.clientX;
+        return;
+      }
+      const delta = event.clientX - previousX;
       previousX = event.clientX;
-      return;
-    }
-    const delta = event.clientX - previousX;
-    previousX = event.clientX;
-    const baseTime = targetTime ?? video.currentTime;
-    targetTime = Math.max(0, Math.min(video.duration, baseTime + (delta / window.innerWidth) * SENSITIVITY * video.duration));
-  }, { passive: true });
-  window.requestAnimationFrame(smoothSeek);
+      const baseTime = targetTime ?? video.currentTime;
+      targetTime = Math.max(0, Math.min(video.duration, baseTime + (delta / window.innerWidth) * SENSITIVITY * video.duration));
+    }, { passive: true });
+    window.requestAnimationFrame(smoothSeek);
+  }
 }
 
 if (menuButton && mobileMenu) {

@@ -12,28 +12,42 @@
   </head>
   <body>
     <div class="source-guard" role="status" aria-live="polite" aria-hidden="true">
-      <strong>Source code protected</strong>
-      <span>This page does not expose its source in this view.</span>
+      <strong data-i18n="guardTitle">Source code protected</strong>
+      <span data-i18n="guardText">This page does not expose its source in this view.</span>
     </div>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="Abdelrahman home">
-        <span class="brand-name">عبد الرحمن الطيب</span>
+        <span class="brand-name">Abdelrahman Al Tayeb</span>
         <span class="brand-mark" aria-hidden="true">✳︎</span>
       </a>
       <nav class="desktop-nav" aria-label="Primary navigation">
-        <a href="#work">Work</a>, <a href="#about">About</a>, <a href="#contact">Contact</a>
+        <a href="#work" data-i18n="work">Work</a>, <a href="#about" data-i18n="about">About</a>, <a href="#contact" data-i18n="contact">Contact</a>
       </nav>
-      <a class="desktop-contact" href="mailto:hello@mainframe.co">Get in touch</a>
+      <a class="desktop-contact" href="mailto:abdoaltyp8@gmail.com" data-i18n="getInTouch">Get in touch</a>
+      <div class="language-switcher">
+        <button class="language-button" type="button" aria-expanded="false" aria-label="Choose language">
+          <span aria-hidden="true">◎</span><span data-current-language>EN</span><span class="language-chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="language-menu" role="menu">
+          <button type="button" data-language="en" role="menuitem">English</button>
+          <button type="button" data-language="ar" role="menuitem">العربية</button>
+          <button type="button" data-language="fr" role="menuitem">Français</button>
+          <button type="button" data-language="it" role="menuitem">Italiano</button>
+          <button type="button" data-language="zh" role="menuitem">中文</button>
+          <button type="button" data-language="hi" role="menuitem">हिन्दी</button>
+          <button type="button" data-language="de" role="menuitem">Deutsch</button>
+        </div>
+      </div>
       <button class="mobile-toggle" type="button" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </header>
 
     <nav class="mobile-menu" aria-label="Mobile navigation">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-      <a href="mailto:hello@mainframe.co">Get in touch</a>
+      <a href="#work" data-i18n="work">Work</a>
+      <a href="#about" data-i18n="about">About</a>
+      <a href="#contact" data-i18n="contact">Contact</a>
+      <a href="mailto:abdoaltyp8@gmail.com" data-i18n="getInTouch">Get in touch</a>
     </nav>
 
     <main id="top">
@@ -41,18 +55,36 @@
         <video class="hero-video" muted playsinline preload="auto" aria-hidden="true"></video>
         <div class="hero-shade" aria-hidden="true"></div>
         <div class="hero-content">
-          <p class="hero-intro">Hey there, meet Abdelrahman,<br>Front-end web developer · 21 years old</p>
-          <p class="hero-description" data-text="I'm Abdelrahman, a 21-year-old front-end web developer. I turn ideas into sharp, useful websites."></p>
+          <div class="warp-text" data-warp-text="Bend the moment" data-label="Bend the moment" role="img" aria-label="Bend the moment">
+            <span data-i18n="warp">Bend the moment</span>
+          </div>
+          <p class="hero-intro" data-i18n="intro">Hey there, meet Abdelrahman,<br>Front-end web developer · 21 years old</p>
+          <p class="hero-description" data-i18n="description" data-text="I'm Abdelrahman, a 21-year-old front-end web developer. I turn ideas into sharp, useful websites."></p>
           <div class="actions is-hidden">
-            <a class="pill" href="#contact">Pitch us an idea</a>
-            <a class="pill" href="#contact">Come work here</a>
-            <a class="pill" href="#contact">Send a brief hello</a>
-            <a class="pill" href="#contact">See how we operate</a>
+            <a class="pill" href="#contact" data-i18n="pitch">Pitch us an idea</a>
+            <a class="pill" href="#contact" data-i18n="workHere">Come work here</a>
+            <a class="pill" href="#contact" data-i18n="sendHello">Send a brief hello</a>
+            <a class="pill" href="#contact" data-i18n="operate">See how we operate</a>
             <button class="pill pill--outline" type="button" data-copy-email>
-              <span>Reach us: <u>hello@mainframe.co</u></span>
+              <span><span data-i18n="reachUs">Reach us:</span> <u>abdoaltyp8@gmail.com</u></span>
               <span aria-hidden="true">▣</span>
             </button>
           </div>
+          <form class="curved-input" data-curved-input>
+            <div class="curved-input__visual" aria-hidden="true">
+              <svg class="curved-input__svg" viewBox="0 0 450 92" preserveAspectRatio="none">
+                <defs>
+                  <path id="curved-email-path" d="M 24 62 Q 225 10 426 62" />
+                </defs>
+                <path class="curved-input__ring" d="M 24 62 Q 225 10 426 62" />
+                <path class="curved-input__shell" d="M 24 62 Q 225 10 426 62" />
+                <text class="curved-input__placeholder"><textPath href="#curved-email-path" startOffset="50%" data-email-placeholder>Enter your email</textPath></text>
+                <text class="curved-input__value"><textPath href="#curved-email-path" startOffset="50%" data-email-value></textPath></text>
+              </svg>
+            </div>
+            <input class="curved-input__field" type="email" name="email" autocomplete="email" placeholder="Enter your email" data-email-input aria-label="Enter your email">
+            <button class="curved-input__button" type="submit"><span class="curved-input__mail-icon" aria-hidden="true">✉</span><span data-email-button>Get Started</span><span aria-hidden="true">↗</span></button>
+          </form>
         </div>
       </section>
 
@@ -60,35 +92,35 @@
         <div class="work-inner">
           <div class="work-head">
             <div>
-              <p class="eyebrow">Selected work / 2023—2026</p>
-              <h1 class="work-title">Previous work<span>.</span></h1>
+              <p class="eyebrow" data-i18n="selectedWork">Selected work / 2023—2026</p>
+              <h1 class="work-title"><span data-i18n="previousWork">Previous work</span><span>.</span></h1>
             </div>
-            <p id="about" class="work-intro">A few websites and digital experiences I have designed and built from the first sketch to the final pixel.</p>
+            <p id="about" class="work-intro" data-i18n="workIntro">A few websites and digital experiences I have designed and built from the first sketch to the final pixel.</p>
           </div>
 
           <div class="projects">
             <a class="project" href="https://abdoaltyp11-alt.github.io/MUGORA/" target="_blank" rel="noreferrer">
               <div class="project-preview project--one"><img src="images/1.jpg" alt="MUGORA project preview"><span class="project-number">01</span><span class="project-arrow">↗</span></div>
-              <div class="project-meta"><h2 class="project-title">MUGORA</h2><p class="project-type">Website design and development</p></div>
+              <div class="project-meta"><h2 class="project-title">MUGORA</h2><p class="project-type" data-i18n="mugoraType">Website design and development</p></div>
             </a>
             <a class="project" href="https://abdoaltyp11-alt.github.io/3OBAYDA-PERFUME/" target="_blank" rel="noreferrer">
               <div class="project-preview project--two"><img src="images/2.jpg" alt="3OBAYDA PERFUME project preview"><span class="project-number">02</span><span class="project-arrow">↗</span></div>
-              <div class="project-meta"><h2 class="project-title">3OBAYDA PERFUME</h2><p class="project-type">Brand website and interaction design</p></div>
+              <div class="project-meta"><h2 class="project-title">3OBAYDA PERFUME</h2><p class="project-type" data-i18n="obaydaType">Brand website and interaction design</p></div>
             </a>
             <a class="project" href="https://abdoaltyp11-alt.github.io/Bn-Sinai-Travel/" target="_blank" rel="noreferrer">
               <div class="project-preview project--three"><img src="images/3.jpg" alt="BN SINAI TRAVEL project preview"><span class="project-number">03</span><span class="project-arrow">↗</span></div>
-              <div class="project-meta"><h2 class="project-title">BN SINAI TRAVEL</h2><p class="project-type">Travel website and front-end build</p></div>
+              <div class="project-meta"><h2 class="project-title">BN SINAI TRAVEL</h2><p class="project-type" data-i18n="sinaiType">Travel website and front-end build</p></div>
             </a>
           </div>
 
           <div id="contact" class="footer-contact">
-            <span>Available for thoughtful digital projects.</span>
-            <a href="mailto:hello@mainframe.co">hello@mainframe.co</a>
+            <span data-i18n="availability">Available for thoughtful digital projects.</span>
+            <a href="mailto:abdoaltyp8@gmail.com">abdoaltyp8@gmail.com</a>
           </div>
         </div>
       </section>
     </main>
-    <div class="site-watermark" aria-hidden="true">© عبد الرحمن الطيب | <span data-year></span></div>
+    <div class="site-watermark" aria-hidden="true">© Abdelrahman Al Tayeb | <span data-year></span></div>
     <script src="script.js"></script>
   </body>
 </html>

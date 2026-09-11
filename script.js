@@ -240,14 +240,19 @@ document.querySelectorAll('img').forEach((image) => {
 });
 
 if (video) {
+  video.muted = true;
+  video.autoplay = true;
+  video.loop = true;
+  video.playsInline = true;
   video.src = VIDEO_URL;
   video.load();
   const startVideo = () => {
-    video.play().catch(() => {
-      // Some mobile browsers wait for a user gesture before allowing playback.
-    });
+    video.play().catch(() => {});
   };
+  video.addEventListener('canplay', startVideo, { once: true });
   video.addEventListener('loadeddata', startVideo, { once: true });
+  document.addEventListener('touchstart', startVideo, { once: true, passive: true });
+  document.addEventListener('pointerdown', startVideo, { once: true, passive: true });
   startVideo();
 
   if (window.matchMedia('(min-width: 768px) and (pointer: fine)').matches) {

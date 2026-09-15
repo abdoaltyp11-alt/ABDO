@@ -1,126 +1,1275 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#101010">
-    <meta name="description" content="Abdelrahman is a front-end web developer creating sharp, useful websites.">
-    <title>Abdelrahman | Front-end web developer</title>
-    <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/5ac3fe7c6abd2f62067f266d89671492?family=HelveticaNowDisplay-Medium">
-    <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/1aa3377e489837a26d019bba501e779d?family=HelveticaNowDisplayW01-Rg">
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <div class="source-guard" role="status" aria-live="polite" aria-hidden="true">
-      <strong data-i18n="guardTitle">Source code protected</strong>
-      <span data-i18n="guardText">This page does not expose its source in this view.</span>
-    </div>
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="Abdelrahman home">
-        <span class="brand-name">Abdelrahman Al Tayeb</span>
-        <span class="brand-mark" aria-hidden="true">✳︎</span>
-      </a>
-      <nav class="desktop-nav" aria-label="Primary navigation">
-        <a href="#work" data-i18n="work">Work</a>, <a href="#about" data-i18n="about">About</a>, <a href="#contact" data-i18n="contact">Contact</a>
-      </nav>
-      <a class="desktop-contact" href="mailto:abdoaltyp8@gmail.com" data-i18n="getInTouch">Get in touch</a>
-      <div class="language-switcher">
-        <button class="language-button" type="button" aria-expanded="false" aria-label="Choose language">
-          <span aria-hidden="true">◎</span><span data-current-language>EN</span><span class="language-chevron" aria-hidden="true">⌄</span>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="LGPSM° — Future-forward engineering studio. Modular systems, neural interfaces and digital commerce at production scale." />
+<title>LGPSM° — Future Forward Engineering</title>
+
+<!-- Lucide icons (pinned version for stability) -->
+<script src="https://unpkg.com/lucide@0.294.0/dist/umd/lucide.min.js"></script>
+
+<style>
+/* ══════════════════════════════════════════════════
+   FONTS & TOKENS
+   ══════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --pad-x: clamp(1.25rem, 4.5vw, 5rem);
+  --header-pt: clamp(1.25rem, 2.5vh, 2.5rem);
+  --gap-nav: clamp(1rem, 2.2vw, 2.25rem);
+  --logo: clamp(1.35rem, 1.2vw + 0.9rem, 2.1rem);
+  --nav: clamp(0.65rem, 0.35vw + 0.5rem, 0.875rem);
+  --headline: clamp(2.15rem, 4.5vw + 0.75rem, 5.25rem);
+  --body: clamp(0.7rem, 0.35vw + 0.55rem, 0.9rem);
+  --btn-px: clamp(1.15rem, 1.4vw, 1.75rem);
+  --btn-py: clamp(0.6rem, 0.9vh, 0.85rem);
+  --btn-gap: clamp(0.75rem, 1vw, 1.1rem);
+  --feature-min: clamp(13rem, 18vw, 20rem);
+  --feature-pad: clamp(1rem, 1.5vw, 1.75rem);
+  --globe: clamp(2.25rem, 2.5vw + 1rem, 3.25rem);
+  --checker-w: clamp(2.75rem, 4.5vw, 6.5rem);
+  --checker-h: clamp(1.35rem, 2.2vw, 3rem);
+  --corner: clamp(0.65rem, 0.4vw + 0.4rem, 0.95rem);
+  --icon: clamp(1rem, 0.6vw + 0.7rem, 1.35rem);
+  --drawer-max: clamp(20rem, 30vw, 30rem);
+  --section-gap: clamp(0.75rem, 1.5vh, 1.5rem);
+  --main-py: clamp(1.25rem, 4vh, 4rem);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --hero-img: url('https://i.postimg.cc/50kWzc4b/image.png');
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: #fff; color: #000;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+body.locked { overflow: hidden; }
+button { font-family: inherit; }
+.font-orbitron { font-family: 'Orbitron', sans-serif; }
+
+:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+.slim-scroll::-webkit-scrollbar { width: 4px; }
+.slim-scroll::-webkit-scrollbar-thumb { background: #d4d4d8; }
+
+/* ══════════════════════════════════════════════════
+   CURSOR-REVEAL BACKGROUND (desktop only)
+   ══════════════════════════════════════════════════ */
+.bg-reveal { position: fixed; inset: 0; z-index: 0; overflow: hidden; background: #fff; display: none; }
+@media (min-width: 1024px) { .bg-reveal { display: block; } }
+.bg-reveal > div { position: absolute; inset: 0; }
+.bg-reveal .base   { background: var(--hero-img) center/cover no-repeat; opacity: .16; }
+.bg-reveal .grid-layer {
+  opacity: .3;
+  background-image:
+    linear-gradient(to right, rgba(100,116,139,.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(100,116,139,.14) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.bg-reveal .reveal {
+  background: var(--hero-img) center/cover no-repeat;
+  -webkit-mask-image: radial-gradient(clamp(220px,24vw,440px) circle at var(--mx,50%) var(--my,50%),
+    #000 0%, #000 32%, rgba(0,0,0,.6) 58%, rgba(0,0,0,.15) 80%, transparent 100%);
+          mask-image: radial-gradient(clamp(220px,24vw,440px) circle at var(--mx,50%) var(--my,50%),
+    #000 0%, #000 32%, rgba(0,0,0,.6) 58%, rgba(0,0,0,.15) 80%, transparent 100%);
+}
+.bg-reveal .vignette { background: radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(255,255,255,.85) 100%); }
+
+/* ══════════════════════════════════════════════════
+   CORNER BRACKETS (pure CSS — 8 gradient layers)
+   ══════════════════════════════════════════════════ */
+.corners {
+  --cc: currentColor;
+  background-image:
+    linear-gradient(var(--cc), var(--cc)), linear-gradient(var(--cc), var(--cc)),
+    linear-gradient(var(--cc), var(--cc)), linear-gradient(var(--cc), var(--cc)),
+    linear-gradient(var(--cc), var(--cc)), linear-gradient(var(--cc), var(--cc)),
+    linear-gradient(var(--cc), var(--cc)), linear-gradient(var(--cc), var(--cc));
+  background-size:
+    var(--corner) 1.5px, 1.5px var(--corner),
+    var(--corner) 1.5px, 1.5px var(--corner),
+    var(--corner) 1.5px, 1.5px var(--corner),
+    var(--corner) 1.5px, 1.5px var(--corner);
+  background-position:
+    left top, left top, right top, right top,
+    left bottom, left bottom, right bottom, right bottom;
+  background-repeat: no-repeat;
+}
+
+/* ══════════════════════════════════════════════════
+   HERO
+   ══════════════════════════════════════════════════ */
+.hero { position: relative; z-index: 10; display: flex; min-height: 100vh; flex-direction: column; }
+
+.site-header {
+  position: relative; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--header-pt) var(--pad-x) var(--section-gap);
+}
+.logo {
+  display: flex; align-items: flex-start; background: none; border: 0; cursor: pointer;
+  font-family: 'Orbitron', sans-serif; font-weight: 900; letter-spacing: .15em;
+  font-size: var(--logo); line-height: 1; color: #000;
+}
+.logo:hover { opacity: .8; }
+.logo .deg { font-size: var(--logo-deg); margin: -2px 0 0 2px; }
+
+.main-nav {
+  display: flex; align-items: center; gap: var(--gap-nav);
+  font-size: var(--nav); font-weight: 500; text-transform: uppercase; letter-spacing: .2em;
+}
+.nav-link {
+  background: none; border: 0; cursor: pointer; color: #000;
+  text-transform: uppercase; letter-spacing: .2em;
+  transition: opacity .2s; display: inline-flex; align-items: center;
+}
+.nav-link:hover { opacity: .5; }
+.nav-sep { color: #d1d5db; }
+.cart-btn { position: relative; padding: 4px; }
+.cart-btn svg, .menu-btn svg { width: var(--icon); height: var(--icon); stroke-width: 1.5; }
+.cart-count {
+  position: absolute; top: -4px; right: -4px; width: 16px; height: 16px; border-radius: 50%;
+  background: #000; color: #fff; font-size: 9px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.cart-count[hidden] { display: none; }
+.menu-btn { display: none; }
+@media (max-width: 639px) {
+  .nav-link:not(.cart-btn):not(.menu-btn), .nav-sep { display: none; }
+  .menu-btn { display: inline-flex; }
+}
+
+.hero-main {
+  position: relative; z-index: 10; flex: 1; width: 100%;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: var(--main-py) var(--pad-x);
+}
+@media (min-width: 1024px) { .hero-main { flex-direction: row; } }
+
+.hero-left {
+  position: relative; display: flex; flex-direction: column; justify-content: center;
+  align-self: flex-start; margin-bottom: 3.5rem;
+}
+@media (min-width: 1024px) { .hero-left { align-self: center; margin-bottom: 0; } }
+
+.hero-badge {
+  display: flex; align-items: center; gap: .75rem; margin-bottom: 1.5rem;
+  font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .3em; color: #6b7280;
+}
+.pulse-dot { position: relative; width: 8px; height: 8px; flex-shrink: 0; }
+.pulse-dot::before, .pulse-dot::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%; background: #10b981;
+}
+.pulse-dot::before { animation: ping-soft 1.8s cubic-bezier(0,0,.2,1) infinite; }
+
+.title-frame { padding: 1rem; margin: -1rem; display: inline-block; width: fit-content; }
+.hero-title {
+  font-family: 'Orbitron', sans-serif; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .08em; font-size: var(--headline); line-height: 1.05;
+}
+
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--btn-gap); margin-top: 2.5rem; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--btn-gap);
+  padding: var(--btn-py) var(--btn-px); border-radius: 6px; cursor: pointer;
+  font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .18em;
+  transition: all .3s;
+}
+.btn svg { width: var(--icon); height: var(--icon); }
+.btn-solid { background: #000; color: #fff; border: 1px solid #000; }
+.btn-solid:hover { background: #fff; color: #000; }
+.btn-solid:hover svg { transform: translate(2px, -2px); }
+.btn-solid svg { transition: transform .3s; }
+.btn-outline { background: rgba(255,255,255,.7); border: 1px solid #9ca3af; color: #000; backdrop-filter: blur(4px); }
+.btn-outline:hover { border-color: #000; background: #000; color: #fff; }
+
+.hero-feature {
+  position: relative; align-self: flex-end; min-width: var(--feature-min);
+  padding: var(--feature-pad); background-color: rgba(255,255,255,.6); backdrop-filter: blur(4px);
+}
+@media (min-width: 1024px) { .hero-feature { background-color: transparent; backdrop-filter: none; } }
+.hero-feature-inner { display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding-top: 1rem; }
+.globe { width: var(--globe); height: var(--globe); margin-bottom: 1rem; }
+.feature-text { font-weight: 600; text-transform: uppercase; letter-spacing: .18em; font-size: var(--body); }
+.feature-stats {
+  margin-top: 1.5rem; width: 100%; display: flex; justify-content: space-between;
+  border-top: 1px solid rgba(75,85,99,.6); padding-top: .75rem;
+  font-size: 9px; text-transform: uppercase; letter-spacing: .25em; color: #6b7280;
+}
+
+.hero-mobile-img { position: relative; z-index: 10; padding: 0 var(--pad-x) 1.5rem; }
+.hero-mobile-img > div {
+  aspect-ratio: 16/9; width: 100%; border: 1px solid #e5e7eb;
+  background: var(--hero-img) center/cover no-repeat;
+}
+@media (min-width: 1024px) { .hero-mobile-img { display: none; } }
+
+/* ══════════════════════════════════════════════════
+   TICKER
+   ══════════════════════════════════════════════════ */
+.ticker {
+  position: relative; z-index: 10; overflow: hidden;
+  border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb;
+  background: rgba(255,255,255,.7); backdrop-filter: blur(4px); padding: .6rem 0;
+}
+.ticker-track {
+  display: flex; gap: 2.5rem; width: max-content; padding-right: 2.5rem;
+  animation: marquee 30s linear infinite;
+}
+.ticker-item {
+  display: flex; align-items: center; gap: .75rem; white-space: nowrap;
+  font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .3em; color: #6b7280;
+}
+.ticker-item::before { content: ''; width: 4px; height: 4px; background: #000; flex-shrink: 0; }
+
+/* ══════════════════════════════════════════════════
+   SECTIONS
+   ══════════════════════════════════════════════════ */
+.section {
+  position: relative; z-index: 10;
+  padding: calc(var(--main-py) * 2) var(--pad-x);
+  border-top: 1px solid #e5e7eb; background: #fff;
+}
+.section.alt { background: #f9fafb; }
+
+.section-header { margin-bottom: 3rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; }
+@media (min-width: 768px) { .section-header { margin-bottom: 4rem; } }
+.section-index { font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: .35em; color: #9ca3af; }
+.section-title {
+  margin-top: .5rem; font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em;
+}
+.section-hint {
+  display: none; max-width: 20rem; text-align: right;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .2em; line-height: 1.7; color: #9ca3af;
+}
+@media (min-width: 768px) { .section-hint { display: block; } }
+
+/* Projects */
+.projects-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+@media (min-width: 768px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .projects-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; } }
+.project-card {
+  background-color: #fff; border: 1px solid #e5e7eb; padding: 2rem; min-height: 340px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  color: inherit; text-decoration: none; cursor: pointer; transition: all .5s; --cc: #d1d5db;
+}
+.project-card:hover { border-color: #000; box-shadow: 8px 8px 0 0 #000; --cc: #000; }
+.project-meta {
+  margin-bottom: 1.25rem; display: flex; justify-content: space-between;
+  font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: .3em; color: #9ca3af;
+}
+.project-title {
+  margin-bottom: 1rem; font-family: 'Orbitron', sans-serif; font-size: 1.25rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em; text-underline-offset: 4px;
+}
+.project-card:hover .project-title { text-decoration: underline; }
+.project-desc { font-size: .875rem; line-height: 1.7; color: #4b5563; }
+.project-foot { margin-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+.tech-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+.tech-tag {
+  border: 1px solid #e5e7eb; padding: .375rem .75rem; font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .1em; color: #6b7280;
+  transition: color .5s, border-color .5s;
+}
+.project-card:hover .tech-tag { border-color: #000; color: #000; }
+.card-arrow { width: 18px; height: 18px; color: #d1d5db; transition: all .5s; flex-shrink: 0; }
+.project-card:hover .card-arrow { color: #000; transform: translate(4px, -4px); }
+
+/* Templates */
+.templates-grid { max-width: 64rem; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media (min-width: 768px) { .templates-grid { grid-template-columns: repeat(2, 1fr); } }
+.template-card {
+  display: flex; align-items: center; justify-content: space-between;
+  background-color: #fff; border: 1px solid #e5e7eb; padding: 1.5rem; transition: all .3s;
+}
+.template-card:hover {
+  transform: translateY(-4px); border-color: #000;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,.1), 0 8px 10px -6px rgba(0,0,0,.1);
+}
+.template-type { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .25em; color: #9ca3af; }
+.template-name {
+  font-family: 'Orbitron', sans-serif; margin: .25rem 0 .5rem; font-size: 1rem;
+  font-weight: 600; text-transform: uppercase; letter-spacing: .05em;
+}
+.template-desc { font-size: .75rem; line-height: 1.6; color: #6b7280; }
+.template-btn {
+  margin-left: 1rem; flex-shrink: 0; width: 2.5rem; height: 2.5rem; border-radius: 50%;
+  border: 1px solid #e5e7eb; background: none; color: #000;
+  display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .3s;
+}
+.template-btn svg { width: 16px; height: 16px; }
+.template-card:hover .template-btn { background: #000; color: #fff; border-color: #000; }
+
+/* Journal */
+.journal-list { max-width: 64rem; margin: 0 auto; }
+.journal-row {
+  display: flex; cursor: pointer; align-items: center; justify-content: space-between;
+  gap: 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid #e5e7eb; transition: background .3s;
+}
+.journal-row:first-child { border-top: 1px solid #e5e7eb; }
+.journal-row:hover { background: #f9fafb; }
+.journal-date {
+  width: 5rem; flex-shrink: 0; font-family: 'Orbitron', sans-serif;
+  font-size: 10px; letter-spacing: .25em; color: #9ca3af;
+}
+.journal-title {
+  font-family: 'Orbitron', sans-serif; font-size: .875rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em;
+}
+@media (min-width: 768px) { .journal-title { font-size: 1rem; } }
+.journal-meta {
+  display: none; flex-shrink: 0; align-items: center; gap: .5rem;
+  font-size: 10px; text-transform: uppercase; letter-spacing: .25em; color: #9ca3af;
+}
+@media (min-width: 640px) { .journal-meta { display: flex; } }
+
+/* ══════════════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════════════ */
+.site-footer { position: relative; z-index: 10; background: #000; color: #fff; }
+.footer-main { display: flex; flex-direction: column; gap: 3rem; padding: 3.5rem var(--pad-x); }
+@media (min-width: 768px) { .footer-main { flex-direction: row; justify-content: space-between; } }
+.footer-logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; letter-spacing: .15em; }
+.footer-desc { margin-top: 1rem; max-width: 24rem; font-size: .875rem; line-height: 1.7; color: #9ca3af; }
+.footer-coords { margin-top: 1.5rem; font-size: 10px; text-transform: uppercase; letter-spacing: .3em; color: #4b5563; }
+.footer-cols { display: flex; gap: 4rem; }
+.footer-col { display: flex; flex-direction: column; gap: .75rem; font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; }
+.footer-col-title { margin-bottom: .25rem; font-size: 10px; color: #4b5563; }
+.footer-col button, .footer-col a {
+  display: flex; align-items: center; gap: .5rem; color: #d1d5db; text-decoration: none;
+  background: none; border: 0; cursor: pointer; text-align: left; transition: color .2s;
+  font: inherit; letter-spacing: inherit; text-transform: inherit; padding: 0;
+}
+.footer-col button:hover, .footer-col a:hover { color: #fff; }
+.footer-bottom {
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  gap: .5rem; border-top: 1px solid rgba(255,255,255,.1); padding: 1.25rem var(--pad-x);
+  font-size: 10px; text-transform: uppercase; letter-spacing: .3em; color: #6b7280;
+}
+@media (min-width: 640px) { .footer-bottom { flex-direction: row; } }
+
+/* ══════════════════════════════════════════════════
+   DRAWER
+   ══════════════════════════════════════════════════ */
+.drawer-root { position: fixed; inset: 0; z-index: 50; }
+.drawer-overlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,.25);
+  backdrop-filter: blur(2px); animation: fade-in .25s ease both; cursor: pointer;
+}
+.drawer {
+  position: absolute; top: 0; right: 0; height: 100%; width: 100%; max-width: var(--drawer-max);
+  background: #fff; border-left: 1px solid #e5e7eb;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
+  display: flex; flex-direction: column; animation: drawer-in .45s var(--ease-out) both;
+}
+.drawer-header {
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid #f3f4f6; padding: 1.25rem 1.5rem;
+}
+.drawer-title { font-family: 'Orbitron', sans-serif; font-size: 1.125rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
+.drawer-close {
+  background: none; border: 0; cursor: pointer; padding: .5rem; border-radius: 50%;
+  display: flex; transition: background .2s;
+}
+.drawer-close:hover { background: #f3f4f6; }
+.drawer-close svg { width: 20px; height: 20px; }
+.drawer-body { flex: 1; overflow-y: auto; padding: 1.5rem; min-height: 0; }
+.drawer-footer { border-top: 1px solid #f3f4f6; padding: 1.25rem 1.5rem; }
+
+.panel-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .25em; color: #6b7280; margin-bottom: 1.25rem; }
+
+/* Shop */
+.shop-list { display: flex; flex-direction: column; gap: 1.25rem; }
+.shop-item { border: 1px solid #e5e7eb; padding: 1rem; transition: border-color .2s; }
+.shop-item:hover { border-color: #000; }
+.shop-item-top { display: flex; justify-content: space-between; margin-bottom: .25rem; }
+.shop-tag { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: .25em; color: #9ca3af; }
+.shop-price { font-size: .875rem; font-weight: 600; }
+.shop-title { font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 1rem; }
+.add-btn {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: .5rem;
+  background: #f9fafb; border: 1px solid #e5e7eb; padding: .625rem; color: #000;
+  font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .25em;
+  cursor: pointer; transition: all .2s;
+}
+.add-btn:hover { background: #000; color: #fff; border-color: #000; }
+.add-btn svg { width: 12px; height: 12px; }
+
+/* Cart */
+.cart-empty { height: 100%; min-height: 260px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: #9ca3af; }
+.cart-row {
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid #f3f4f6; padding-bottom: 1rem; margin-bottom: 1.25rem;
+}
+.cart-title { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+.cart-price { margin-top: 2px; font-size: .875rem; color: #6b7280; }
+.cart-controls { display: flex; align-items: center; gap: .5rem; margin-left: 1rem; }
+.qty-group { display: flex; align-items: center; border: 1px solid #e5e7eb; }
+.qty-btn { background: none; border: 0; padding: .375rem; cursor: pointer; display: flex; color: #000; }
+.qty-btn:hover { background: #f3f4f6; }
+.qty-btn svg { width: 12px; height: 12px; }
+.qty-val { width: 1.5rem; text-align: center; font-size: .75rem; font-weight: 600; }
+.remove-btn { background: none; border: 0; padding: .375rem; color: #9ca3af; cursor: pointer; display: flex; }
+.remove-btn:hover { color: #000; }
+.remove-btn svg { width: 13px; height: 13px; }
+.cart-note { font-size: 10px; text-transform: uppercase; letter-spacing: .25em; color: #9ca3af; padding-top: .5rem; }
+.total-row { display: flex; justify-content: space-between; font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; }
+.checkout-btn {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: .5rem;
+  background: #000; color: #fff; border: 0; padding: 1rem; margin-top: 1rem;
+  font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .25em;
+  cursor: pointer; transition: background .2s;
+}
+.checkout-btn:hover { background: #111827; }
+.checkout-btn:disabled { opacity: .6; cursor: default; }
+.checkout-btn svg { width: 15px; height: 15px; }
+
+/* Assistant & Vision */
+.assistant-wrap { height: 100%; display: flex; flex-direction: column; }
+.panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.chat-scroll { flex: 1; overflow-y: auto; padding-right: .25rem; display: flex; flex-direction: column; gap: 1rem; min-height: 0; }
+.chat-msg { display: flex; flex-direction: column; animation: rise-in .35s var(--ease-out) both; }
+.chat-msg.user { align-items: flex-end; }
+.chat-msg.model { align-items: flex-start; }
+.bubble { max-width: 85%; padding: .75rem; font-size: .875rem; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
+.chat-msg.user .bubble { background: #000; color: #fff; }
+.chat-msg.model .bubble { background: #f9fafb; border: 1px solid #e5e7eb; color: #111827; }
+.msg-label { margin-top: .25rem; font-size: 9px; text-transform: uppercase; letter-spacing: .25em; color: #9ca3af; }
+.typing {
+  display: flex; align-items: center; gap: .5rem; border: 1px solid #e5e7eb;
+  background: #f9fafb; padding: .75rem; font-size: .875rem; color: #6b7280;
+}
+.typing svg { width: 14px; height: 14px; }
+.suggestions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.suggestion {
+  border: 1px solid #e5e7eb; background: none; padding: .375rem .75rem; color: #4b5563;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .05em; cursor: pointer; transition: all .2s;
+}
+.suggestion:hover:not(:disabled) { border-color: #000; color: #000; }
+.suggestion:disabled { opacity: .5; cursor: default; }
+.chat-form { display: flex; gap: .5rem; margin-top: 1rem; }
+.text-input {
+  flex: 1; border: 1px solid #d1d5db; padding: .75rem;
+  font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; font-family: inherit;
+}
+.text-input:focus { outline: none; border-color: #000; }
+.text-input:disabled { opacity: .5; }
+.send-btn {
+  background: #000; color: #fff; border: 0; padding: .75rem; cursor: pointer;
+  display: flex; align-items: center; transition: background .2s;
+}
+.send-btn:hover:not(:disabled) { background: #1f2937; }
+.send-btn:disabled { opacity: .4; cursor: default; }
+.send-btn svg { width: 16px; height: 16px; }
+.link-btn {
+  background: none; border: 0; font-size: 10px; text-transform: uppercase; letter-spacing: .1em;
+  color: #9ca3af; text-decoration: underline; cursor: pointer;
+}
+.link-btn:hover { color: #000; }
+
+.vision-stage {
+  position: relative; flex: 1; min-height: 300px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid #e5e7eb; background: #f9fafb; overflow: hidden;
+}
+.vision-placeholder { display: flex; flex-direction: column; align-items: center; gap: .75rem; padding: 0 1.5rem; color: #9ca3af; }
+.vision-placeholder span { text-align: center; font-size: 11px; text-transform: uppercase; letter-spacing: .25em; }
+.vision-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.download-btn {
+  position: absolute; bottom: .75rem; right: .75rem; display: flex; align-items: center; gap: .5rem;
+  background: #000; color: #fff; border: 0; padding: .5rem .75rem; text-decoration: none;
+  font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em;
+}
+.download-btn:hover { background: #1f2937; }
+.download-btn svg { width: 12px; height: 12px; }
+
+.error-note {
+  display: flex; align-items: flex-start; gap: .5rem; border: 1px solid #fecaca;
+  background: #fef2f2; padding: .75rem; font-size: .75rem; line-height: 1.6;
+  color: #b91c1c; margin-bottom: 1rem;
+}
+.error-note svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; }
+
+.status-line { display: flex; align-items: center; justify-content: center; gap: .5rem; font-size: 10px; text-transform: uppercase; letter-spacing: .3em; color: #9ca3af; }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.status-dot.online { background: #10b981; }
+.status-dot.offline { background: #f87171; }
+.legal-note { text-align: center; font-size: 10px; text-transform: uppercase; letter-spacing: .3em; color: #9ca3af; }
+.spinner { animation: spin 1s linear infinite; }
+
+/* ══════════════════════════════════════════════════
+   MOBILE MENU & TOASTS
+   ══════════════════════════════════════════════════ */
+.mobile-menu { position: fixed; inset: 0; z-index: 45; }
+.mobile-menu-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.25); backdrop-filter: blur(2px); cursor: pointer; }
+.mobile-nav {
+  position: absolute; left: 1rem; right: 1rem; top: 5rem;
+  background: #fff; border: 1px solid #e5e7eb; padding: .5rem;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
+  animation: rise-in .35s var(--ease-out) both;
+}
+.mobile-nav button {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem; background: none; border: 0; border-bottom: 1px solid #f3f4f6; color: #000;
+  font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .2em; cursor: pointer;
+}
+.mobile-nav button:last-child { border-bottom: 0; }
+.mobile-nav button:hover { background: #f9fafb; }
+.mobile-nav button svg { width: 16px; height: 16px; color: #9ca3af; }
+
+.toast-stack {
+  position: fixed; top: 1rem; right: 1rem; z-index: 70;
+  display: flex; flex-direction: column; gap: .5rem;
+  width: calc(100% - 2rem); max-width: 20rem; pointer-events: none;
+}
+.toast {
+  pointer-events: auto; display: flex; align-items: center; gap: .75rem;
+  background: #000; color: #fff; padding: .75rem 1rem; border: 0; cursor: pointer; text-align: left;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,.25);
+  animation: rise-in .35s var(--ease-out) both;
+  transition: opacity .3s, transform .3s;
+}
+.toast.hide { opacity: 0; transform: translateY(-8px); }
+.toast svg { width: 15px; height: 15px; flex-shrink: 0; }
+.toast.ok svg { color: #34d399; }
+.toast.err svg { color: #f87171; }
+.toast-text { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; }
+
+/* ══════════════════════════════════════════════════
+   ANIMATIONS & MOTION
+   ══════════════════════════════════════════════════ */
+[data-reveal] {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .8s ease, transform .8s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal].is-revealed { opacity: 1; transform: none; }
+
+@keyframes drawer-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes ping-soft { 0% { transform: scale(1); opacity: .9; } 80%, 100% { transform: scale(2.6); opacity: 0; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .ticker-track, .pulse-dot::before { animation: none; }
+  .drawer, .drawer-overlay, .toast, .chat-msg, .mobile-nav { animation-duration: .01s; }
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor-reveal background (desktop) -->
+<div class="bg-reveal" id="bgReveal" aria-hidden="true" style="--mx:50%; --my:50%;">
+  <div class="base"></div>
+  <div class="grid-layer"></div>
+  <div class="reveal"></div>
+  <div class="vignette"></div>
+</div>
+
+<!-- ══════════ HERO ══════════ -->
+<div class="hero">
+  <header class="site-header">
+    <button class="logo" data-action="top" aria-label="Back to top">
+      Abdelrahman
+    </button>
+    <nav class="main-nav" aria-label="Primary">
+      <button class="nav-link" data-nav="projects">Projects</button>
+      <button class="nav-link" data-nav="templates">Templates</button>
+      <button class="nav-link" data-drawer="AI ASSISTANT">AI Assistant</button>
+      <button class="nav-link" data-drawer="VISION LAB">Vision Lab</button>
+      <span class="nav-sep" aria-hidden="true">|</span>
+      <button class="cart-btn nav-link" data-drawer="CART" aria-label="Shopping bag">
+        <i data-lucide="shopping-bag"></i>
+        <span class="cart-count" id="cartCount" hidden>0</span>
+      </button>
+      <button class="menu-btn nav-link" id="menuBtn" data-action="open-menu" aria-label="Open menu" aria-expanded="false">
+        <i data-lucide="menu"></i>
+      </button>
+    </nav>
+  </header>
+
+  <main class="hero-main">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        Frontend Developer — Egypt
+      </div>
+
+      <div class="title-frame corners">
+        <h1 class="hero-title">
+          Future<br>Forward<br>Engineering
+          <svg class="inline-block" style="width:var(--checker-w);height:var(--checker-h);transform:translateY(2px);" viewBox="0 0 36 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0" y="0" width="3.8" height="3.8" fill="currentColor"/><rect x="7.6" y="0" width="3.8" height="3.8" fill="currentColor"/><rect x="15.2" y="0" width="3.8" height="3.8" fill="currentColor"/>
+            <rect x="2.25" y="4.5" width="3.8" height="3.8" fill="currentColor"/><rect x="9.85" y="4.5" width="3.8" height="3.8" fill="currentColor"/><rect x="17.45" y="4.5" width="3.8" height="3.8" fill="currentColor"/>
+            <rect x="0" y="9" width="3.8" height="3.8" fill="currentColor"/><rect x="7.6" y="9" width="3.8" height="3.8" fill="currentColor"/><rect x="15.2" y="9" width="3.8" height="3.8" fill="currentColor"/>
+            <rect x="2.25" y="13.5" width="3.8" height="3.8" fill="currentColor"/><rect x="9.85" y="13.5" width="3.8" height="3.8" fill="currentColor"/><rect x="17.45" y="13.5" width="3.8" height="3.8" fill="currentColor"/>
+          </svg>
+        </h1>
+      </div>
+
+      <div class="hero-actions">
+        <button class="btn btn-solid" data-nav="projects">
+          <span>View Work</span>
+          <i data-lucide="arrow-up-right"></i>
         </button>
-        <div class="language-menu" role="menu">
-          <button type="button" data-language="en" role="menuitem">English</button>
-          <button type="button" data-language="ar" role="menuitem">العربية</button>
-          <button type="button" data-language="fr" role="menuitem">Français</button>
-          <button type="button" data-language="it" role="menuitem">Italiano</button>
-          <button type="button" data-language="zh" role="menuitem">中文</button>
-          <button type="button" data-language="hi" role="menuitem">हिन्दी</button>
-          <button type="button" data-language="de" role="menuitem">Deutsch</button>
+        <button class="btn btn-outline" data-drawer="VISION LAB">Vision Lab</button>
+      </div>
+    </div>
+
+    <aside class="hero-feature corners">
+      <div class="hero-feature-inner">
+        <svg class="globe" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <circle cx="32" cy="32" r="28"/>
+          <path d="M4 32h56M32 4v56"/>
+          <ellipse cx="32" cy="32" rx="14" ry="28"/>
+          <ellipse cx="32" cy="32" rx="28" ry="14"/>
+        </svg>
+        <p class="feature-text">Beyond code.<br>Built for scale.</p>
+        <div class="feature-stats">
+          <span>Uptime 99.98%</span>
+          <span>60 FPS Budget</span>
         </div>
       </div>
-      <button class="mobile-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+    </aside>
+  </main>
+
+  <!-- Mobile static image fallback -->
+  <div class="hero-mobile-img" aria-hidden="true"><div></div></div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+</div>
+
+<!-- ══════════ PROJECTS ══════════ -->
+<section class="section" id="projects">
+  <div class="section-header" data-reveal>
+    <div>
+      <div class="section-index">01</div>
+      <h2 class="section-title">Selected Projects</h2>
+    </div>
+    <p class="section-hint">Production systems — deployed, measured, maintained.</p>
+  </div>
+  <div class="projects-grid" id="projectsGrid"></div>
+</section>
+
+<!-- ══════════ TEMPLATES ══════════ -->
+<section class="section alt" id="templates">
+  <div class="section-header" data-reveal>
+    <div>
+      <div class="section-index">02</div>
+      <h2 class="section-title">Architecture Templates</h2>
+    </div>
+    <p class="section-hint">Open-source scaffolding for modern development pipelines.</p>
+  </div>
+  <div class="templates-grid" id="templatesGrid"></div>
+</section>
+
+<!-- ══════════ JOURNAL ══════════ -->
+<section class="section" id="journal">
+  <div class="section-header" data-reveal>
+    <div>
+      <div class="section-index">03</div>
+      <h2 class="section-title">Journal</h2>
+    </div>
+    <p class="section-hint">Field notes on materials, motion and systems.</p>
+  </div>
+  <div class="journal-list" id="journalList"></div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="site-footer">
+  <div class="footer-main">
+    <div>
+      <div class="footer-logo">LGPSM<span style="font-size:.875rem;vertical-align:super;">˚</span></div>
+      <p class="footer-desc">
+        Future-forward engineering studio. We design modular systems, neural interfaces
+        and digital commerce at production scale.
+      </p>
+      <p class="footer-coords">51.5072° N — 0.1276° W · LDN</p>
+    </div>
+    <div class="footer-cols">
+      <nav class="footer-col" aria-label="Footer index">
+        <span class="footer-col-title">Index</span>
+        <button data-nav="projects">Projects</button>
+        <button data-nav="templates">Templates</button>
+        <button data-nav="journal">Journal</button>
+      </nav>
+      <nav class="footer-col" aria-label="Social links">
+        <span class="footer-col-title">Social</span>
+        <a href="#" onclick="return false"><i data-lucide="github" style="width:14px;height:14px;"></i> GitHub</a>
+        <a href="#" onclick="return false"><i data-lucide="twitter" style="width:14px;height:14px;"></i> X / Twitter</a>
+        <a href="#" onclick="return false"><i data-lucide="linkedin" style="width:14px;height:14px;"></i> LinkedIn</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 LGPSM Studio — All rights reserved</span>
+    <span>Built with React · Deployed on the Edge</span>
+  </div>
+</footer>
+
+<!-- ══════════ MOBILE MENU ══════════ -->
+<div class="mobile-menu" id="mobileMenu" hidden role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <div class="mobile-menu-overlay" data-action="close-menu"></div>
+  <nav class="mobile-nav" id="mobileNav"></nav>
+</div>
+
+<!-- ══════════ DRAWER ══════════ -->
+<div class="drawer-root" id="drawerRoot" hidden role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="drawer-overlay" data-action="close-drawer"></div>
+  <aside class="drawer">
+    <header class="drawer-header">
+      <h2 class="drawer-title" id="drawerTitle">Panel</h2>
+      <button class="drawer-close" id="drawerClose" data-action="close-drawer" aria-label="Close panel">
+        <i data-lucide="x"></i>
       </button>
     </header>
+    <div class="drawer-body slim-scroll" id="drawerBody"></div>
+    <footer class="drawer-footer" id="drawerFooter"></footer>
+  </aside>
+</div>
 
-    <nav class="mobile-menu" aria-label="Mobile navigation">
-      <a href="#work" data-i18n="work">Work</a>
-      <a href="#about" data-i18n="about">About</a>
-      <a href="#contact" data-i18n="contact">Contact</a>
-      <a href="mailto:abdoaltyp8@gmail.com" data-i18n="getInTouch">Get in touch</a>
-    </nav>
+<!-- ══════════ TOASTS ══════════ -->
+<div class="toast-stack" id="toastStack" aria-live="polite"></div>
 
-    <main id="top">
-      <section class="hero">
-        <video class="hero-video" muted autoplay loop playsinline preload="auto" aria-hidden="true"></video>
-        <div class="hero-shade" aria-hidden="true"></div>
-        <div class="hero-content">
-          <div class="warp-text" data-warp-text="Bend the moment" data-label="Bend the moment" role="img" aria-label="Bend the moment">
-            <span data-i18n="warp">Bend the moment</span>
-          </div>
-          <p class="hero-intro" data-i18n="intro">Hey there, meet Abdelrahman,<br>Front-end web developer · 21 years old</p>
-          <p class="hero-description" data-i18n="description" data-text="I'm Abdelrahman, a 21-year-old front-end web developer. I turn ideas into sharp, useful websites."></p>
-          <div class="actions is-hidden">
-            <a class="pill" href="#contact" data-i18n="pitch">Pitch us an idea</a>
-            <a class="pill" href="#contact" data-i18n="workHere">Come work here</a>
-            <a class="pill" href="#contact" data-i18n="sendHello">Send a brief hello</a>
-            <a class="pill" href="#contact" data-i18n="operate">See how we operate</a>
-            <button class="pill pill--outline" type="button" data-copy-email>
-              <span><span data-i18n="reachUs">Reach us:</span> <u>abdoaltyp8@gmail.com</u></span>
-              <span aria-hidden="true">▣</span>
-            </button>
-          </div>
+<script>
+/* ══════════════════════════════════════════════════════════
+   ⚙️ CONFIG — حط مفتاح Gemini هنا عشان الـ AI يشتغل
+   ══════════════════════════════════════════════════════════ */
+const CONFIG = {
+  apiKey: window.GEMINI_API_KEY || 'PASTE_YOUR_KEY_HERE',
+  base: 'https://generativelanguage.googleapis.com/v1beta/models',
+  chatModel: 'gemini-3-flash-preview',
+  imageModel: 'gemini-3.1-flash-image',
+};
+
+/* ═══ 1 · DATA ═══ */
+const SYSTEM_PROMPT =
+  'You are the LGPSM technical assistant embedded in an engineering portfolio. ' +
+  'Reply in at most 3 sentences. Tone: precise, technical, forward-looking. ' +
+  'Expertise: React architecture, WebGL & data visualization, Rust microservices, edge deployment.';
+
+const VISION_PROMPT =
+  'Editorial fashion-tech concept photograph, architectural minimalism, studio lighting, high fidelity —';
+
+const SUGGESTIONS = ['Review my React architecture', 'Rust microservice layout?', 'WebGL vs Canvas2D?'];
+
+const NAV = [
+  { label: 'Projects',     href: '#projects' },
+  { label: 'Templates',    href: '#templates' },
+  { label: 'AI Assistant', drawer: 'AI ASSISTANT' },
+  { label: 'Vision Lab',   drawer: 'VISION LAB' },
+];
+
+const SHOP_ITEMS = [
+  { id: 'ct-01', title: 'Cyber-Tex Overcoat',       price: 850, tag: 'Limited Edition' },
+  { id: 'gm-02', title: 'Geo-Mesh Tech Hoodie',     price: 320, tag: 'New Drop' },
+  { id: 'ot-03', title: 'Orbital Tapered Trousers', price: 290, tag: 'In Stock' },
+  { id: 'mv-04', title: 'Modular All-Weather Vest', price: 410, tag: 'Pre-Order' },
+];
+
+const PROJECTS = [
+  { title: 'Mugora', year: '2026', desc: 'A focused digital experience for the Mugora project.', url: 'https://abdoaltyp11-alt.github.io/MUGORA/', tech: ['HTML', 'CSS', 'JavaScript'] },
+  { title: '3obayda Perfume', year: '2026', desc: 'A polished perfume storefront experience built for the 3obayda brand.', url: 'https://abdoaltyp11-alt.github.io/3OBAYDA-PERFUME/', tech: ['HTML', 'CSS', 'JavaScript'] },
+  { title: 'Bn Sinai Travel', year: '2026', desc: 'A travel-focused web experience for discovering Bn Sinai destinations.', url: 'https://abdoaltyp11-alt.github.io/Bn-Sinai-Travel/', tech: ['HTML', 'CSS', 'JavaScript'] },
+];
+
+const TEMPLATES = [
+  { name: 'Enterprise SaaS Auth',  type: 'Node / Express',   desc: 'Complete authentication flow with RBAC, JWT and distributed session management.' },
+  { name: 'WebGL Particle Engine', type: 'Three.js / TS',    desc: 'Optimized particle system rendering 1M+ points at a locked 60fps.' },
+  { name: 'Microservice Gateway',  type: 'Go / gRPC',        desc: 'High-throughput API gateway with built-in rate limiting and metrics.' },
+  { name: 'Fluid UI Library',      type: 'React / Tailwind', desc: 'Accessible, proportion-based component styling system.' },
+];
+
+const JOURNAL = [
+  { date: 'AUG 2026', title: 'The Architecture of Next-Gen Textiles', read: '4 min read' },
+  { date: 'JUL 2026', title: 'Circular Design in High-End Apparel',   read: '6 min read' },
+];
+
+const TICKER = ['WebGL Rendering', 'Edge Deployment', 'Zero Latency', 'Neural Interfaces', 'Modular Systems', 'Type-Safe by Default'];
+
+const DRAWER_TITLES = { 'SHOP': 'Catalog', 'CART': 'Shopping Bag', 'AI ASSISTANT': 'AI Assistant', 'VISION LAB': 'Vision Lab' };
+const CART_KEY = 'lgpsm.cart.v1';
+
+/* ═══ 2 · STATE ═══ */
+const state = {
+  drawer: null,
+  cart: [],
+  chat: [],
+  aiBusy: false,
+  visionImage: null,
+  visionBusy: false,
+  chatCtrl: null,
+  visionCtrl: null,
+};
+
+/* ═══ 3 · UTILITIES ═══ */
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+const refreshIcons = () => window.lucide?.createIcons();
+
+async function gemini(model, payload, signal) {
+  if (!CONFIG.apiKey || CONFIG.apiKey === 'PASTE_YOUR_KEY_HERE')
+    throw new Error('Missing API key — set CONFIG.apiKey at the top of the script.');
+  const res = await fetch(`${CONFIG.base}/${model}:generateContent?key=${CONFIG.apiKey}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+    signal,
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw new Error(body?.error?.message || `Upstream error — HTTP ${res.status}`);
+  }
+  return res.json();
+}
+
+/* ═══ 4 · TOASTS ═══ */
+function toast(message, tone = 'ok') {
+  const stack = $('#toastStack');
+  const el = document.createElement('button');
+  el.className = `toast ${tone}`;
+  el.innerHTML = `<i data-lucide="${tone === 'ok' ? 'check' : 'alert-triangle'}"></i>
+                  <span class="toast-text">${esc(message)}</span>`;
+  stack.appendChild(el);
+  refreshIcons();
+  const kill = () => { el.classList.add('hide'); setTimeout(() => el.remove(), 300); };
+  el.addEventListener('click', kill);
+  setTimeout(kill, 3600);
+}
+
+/* ═══ 5 · CART ═══ */
+function loadCart() { try { return JSON.parse(localStorage.getItem(CART_KEY)) ?? []; } catch { return []; } }
+function saveCart() { try { localStorage.setItem(CART_KEY, JSON.stringify(state.cart)); } catch {} }
+const cartCount = () => state.cart.reduce((n, i) => n + i.qty, 0);
+const cartTotal = () => state.cart.reduce((s, i) => s + i.price * i.qty, 0);
+
+function updateCartBadge() {
+  const n = cartCount(), b = $('#cartCount');
+  b.hidden = n === 0;
+  b.textContent = n;
+}
+
+function addToCart(product) {
+  if (!product) return;
+  const found = state.cart.find(i => i.id === product.id);
+  if (found) found.qty++;
+  else state.cart.push({ ...product, qty: 1 });
+  saveCart(); updateCartBadge();
+  toast(`"${product.title}" added to bag.`);
+  if (state.drawer === 'CART') renderDrawer();
+}
+function removeFromCart(id) {
+  state.cart = state.cart.filter(i => i.id !== id);
+  saveCart(); updateCartBadge(); renderDrawer();
+}
+function changeQty(id, delta) {
+  const item = state.cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) return removeFromCart(id);
+  saveCart(); updateCartBadge(); renderDrawer();
+}
+
+/* ═══ 6 · DRAWER ═══ */
+function updateLock() {
+  document.body.classList.toggle('locked', !!state.drawer || !$('#mobileMenu').hidden);
+}
+
+function openDrawer(type) {
+  closeMobileMenu();
+  state.drawer = type;
+  $('#drawerRoot').hidden = false;
+  $('#drawerTitle').textContent = DRAWER_TITLES[type] ?? 'Panel';
+  renderDrawer();
+  updateLock();
+  $('#drawerClose').focus();
+}
+
+function closeDrawer() {
+  state.drawer = null;
+  $('#drawerRoot').hidden = true;
+  updateLock();
+}
+
+function renderDrawer() {
+  const body = $('#drawerBody'), footer = $('#drawerFooter');
+  if (state.drawer === 'SHOP')          body.innerHTML = shopHTML();
+  if (state.drawer === 'CART')          body.innerHTML = cartHTML();
+  if (state.drawer === 'AI ASSISTANT')  body.innerHTML = assistantHTML();
+  if (state.drawer === 'VISION LAB')    body.innerHTML = visionHTML();
+  footer.innerHTML = drawerFooterHTML();
+  refreshIcons();
+  const sc = $('#chatScroll');
+  if (sc) sc.scrollTop = sc.scrollHeight;
+}
+
+/* ── Panel templates ── */
+function shopHTML() {
+  return `<p class="panel-label">Featured Garments — SS26</p>
+    <div class="shop-list">${SHOP_ITEMS.map(i => `
+      <article class="shop-item">
+        <div class="shop-item-top">
+          <span class="shop-tag">${esc(i.tag)}</span>
+          <span class="shop-price">$${i.price}</span>
         </div>
-      </section>
+        <h3 class="shop-title">${esc(i.title)}</h3>
+        <button class="add-btn" data-action="add" data-id="${i.id}">
+          <i data-lucide="plus"></i> Add to Bag
+        </button>
+      </article>`).join('')}</div>`;
+}
 
-      <section id="work" class="work">
-        <div class="work-inner">
-          <div class="work-head">
-            <div>
-              <p class="eyebrow" data-i18n="selectedWork">Selected work / 2023—2026</p>
-              <h1 class="work-title"><span data-i18n="previousWork">Previous work</span><span>.</span></h1>
-            </div>
-            <p id="about" class="work-intro" data-i18n="workIntro">A few websites and digital experiences I have designed and built from the first sketch to the final pixel.</p>
-          </div>
-
-          <div class="projects">
-            <a class="project" href="https://abdoaltyp11-alt.github.io/MUGORA/" target="_blank" rel="noreferrer">
-              <div class="project-preview project--one"><img src="images/1.jpg" alt="MUGORA project preview"><span class="project-number">01</span><span class="project-arrow">↗</span></div>
-              <div class="project-meta"><h2 class="project-title">MUGORA</h2><p class="project-type" data-i18n="mugoraType">Website design and development</p></div>
-            </a>
-            <a class="project" href="https://abdoaltyp11-alt.github.io/3OBAYDA-PERFUME/" target="_blank" rel="noreferrer">
-              <div class="project-preview project--two"><img src="images/2.jpg" alt="3OBAYDA PERFUME project preview"><span class="project-number">02</span><span class="project-arrow">↗</span></div>
-              <div class="project-meta"><h2 class="project-title">3OBAYDA PERFUME</h2><p class="project-type" data-i18n="obaydaType">Brand website and interaction design</p></div>
-            </a>
-            <a class="project" href="https://abdoaltyp11-alt.github.io/Bn-Sinai-Travel/" target="_blank" rel="noreferrer">
-              <div class="project-preview project--three"><img src="images/3.jpg" alt="BN SINAI TRAVEL project preview"><span class="project-number">03</span><span class="project-arrow">↗</span></div>
-              <div class="project-meta"><h2 class="project-title">BN SINAI TRAVEL</h2><p class="project-type" data-i18n="sinaiType">Travel website and front-end build</p></div>
-            </a>
-          </div>
-
-          <div id="contact" class="footer-contact">
-            <span data-i18n="availability">Available for thoughtful digital projects.</span>
-            <a href="mailto:abdoaltyp8@gmail.com">abdoaltyp8@gmail.com</a>
-          </div>
-          <form class="curved-input footer-email" data-curved-input>
-            <div class="curved-input__visual" aria-hidden="true">
-              <svg class="curved-input__svg" viewBox="0 0 450 92" preserveAspectRatio="none">
-                <defs>
-                  <path id="curved-email-path" d="M 24 62 Q 225 10 426 62" />
-                </defs>
-                <path class="curved-input__ring" d="M 24 62 Q 225 10 426 62" />
-                <path class="curved-input__shell" d="M 24 62 Q 225 10 426 62" />
-                <text class="curved-input__placeholder"><textPath href="#curved-email-path" startOffset="50%" data-email-placeholder>Enter your email</textPath></text>
-                <text class="curved-input__value"><textPath href="#curved-email-path" startOffset="50%" data-email-value></textPath></text>
-              </svg>
-            </div>
-            <input class="curved-input__field" type="email" name="email" autocomplete="email" placeholder="Enter your email" data-email-input aria-label="Enter your email">
-            <button class="curved-input__button" type="submit"><span class="curved-input__mail-icon" aria-hidden="true">✉</span><span data-email-button>Get Started</span><span aria-hidden="true">↗</span></button>
-          </form>
+function cartHTML() {
+  if (!state.cart.length) return `
+    <div class="cart-empty">
+      <i data-lucide="shopping-bag" style="width:44px;height:44px;"></i>
+      <p class="panel-label" style="margin:0;">Your shopping bag is empty.</p>
+      <button class="btn btn-outline" data-action="browse">Browse Catalog</button>
+    </div>`;
+  return state.cart.map(i => `
+    <div class="cart-row">
+      <div style="min-width:0;">
+        <h4 class="cart-title">${esc(i.title)}</h4>
+        <p class="cart-price">$${i.price} × ${i.qty}</p>
+      </div>
+      <div class="cart-controls">
+        <div class="qty-group">
+          <button class="qty-btn" data-action="dec" data-id="${i.id}" aria-label="Decrease quantity"><i data-lucide="minus"></i></button>
+          <span class="qty-val">${i.qty}</span>
+          <button class="qty-btn" data-action="inc" data-id="${i.id}" aria-label="Increase quantity"><i data-lucide="plus"></i></button>
         </div>
-      </section>
-    </main>
-    <div class="site-watermark" aria-hidden="true">© Abdelrahman Al Tayeb | <span data-year></span></div>
-    <script src="script.js"></script>
-  </body>
+        <button class="remove-btn" data-action="remove" data-id="${i.id}" aria-label="Remove ${esc(i.title)}"><i data-lucide="trash-2"></i></button>
+      </div>
+    </div>`).join('') + `<p class="cart-note">Shipping &amp; duties calculated at checkout.</p>`;
+}
+
+function assistantHTML() {
+  const online = Boolean(CONFIG.apiKey) && CONFIG.apiKey !== 'PASTE_YOUR_KEY_HERE';
+  let msgs = '';
+  if (!online) msgs += `<div class="error-note"><i data-lucide="alert-triangle"></i>
+    <span>Offline — set <code>CONFIG.apiKey</code> at the top of the script to enable the assistant.</span></div>`;
+  if (!state.chat.length && online) {
+    msgs += `<div>
+      <p style="font-size:.875rem;color:#9ca3af;font-style:italic;">Ask about system architecture, templates, or stacks.</p>
+      <div class="suggestions">${SUGGESTIONS.map(s =>
+        `<button class="suggestion" data-action="suggest" data-text="${esc(s)}" ${state.aiBusy ? 'disabled' : ''}>${esc(s)}</button>`
+      ).join('')}</div></div>`;
+  }
+  msgs += state.chat.map(m => `
+    <div class="chat-msg ${m.role === 'user' ? 'user' : 'model'}">
+      <div class="bubble">${esc(m.parts[0].text)}</div>
+      <span class="msg-label">${m.role === 'user' ? 'You' : 'LGPSM · AI'}</span>
+    </div>`).join('');
+  if (state.aiBusy) msgs += `<div class="typing"><i data-lucide="loader-2" class="spinner"></i> Processing…</div>`;
+
+  return `<div class="assistant-wrap">
+    <div class="panel-head">
+      <span class="panel-label" style="margin:0;display:flex;align-items:center;gap:.5rem;">
+        <i data-lucide="sparkles" style="width:13px;height:13px;"></i> Neural Engine
+      </span>
+      ${state.chat.length ? `<button class="link-btn" data-action="clear-chat">Clear</button>` : ''}
+    </div>
+    <div class="chat-scroll slim-scroll" id="chatScroll">${msgs}</div>
+    <form class="chat-form" id="chatForm">
+      <input class="text-input" name="text" placeholder="INITIATE QUERY…" autocomplete="off"
+             aria-label="Message the assistant" ${(!online || state.aiBusy) ? 'disabled' : ''}>
+      <button class="send-btn" type="submit" aria-label="Send message" ${(!online || state.aiBusy) ? 'disabled' : ''}>
+        <i data-lucide="send"></i>
+      </button>
+    </form>
+  </div>`;
+}
+
+function visionHTML() {
+  const online = Boolean(CONFIG.apiKey) && CONFIG.apiKey !== 'PASTE_YOUR_KEY_HERE';
+  const stage = state.visionImage
+    ? `<img class="vision-img" src="${state.visionImage}" alt="Generated concept">
+       <a class="download-btn" href="${state.visionImage}" download="lgpsm-concept.png">
+         <i data-lucide="download"></i> Save
+       </a>`
+    : `<div class="vision-placeholder">
+         ${state.visionBusy
+           ? '<i data-lucide="loader-2" class="spinner" style="width:22px;height:22px;"></i>'
+           : '<i data-lucide="sparkles" style="width:22px;height:22px;"></i>'}
+         <span>${state.visionBusy ? 'Synthesizing concept…' : 'Describe a garment to visualize it'}</span>
+       </div>`;
+
+  return `<div style="height:100%;display:flex;flex-direction:column;">
+    <p class="panel-label" style="display:flex;align-items:center;gap:.5rem;">
+      <i data-lucide="image" style="width:13px;height:13px;"></i> Prototype Generator
+    </p>
+    ${!online ? `<div class="error-note"><i data-lucide="alert-triangle"></i>
+      <span>Offline — set <code>CONFIG.apiKey</code> at the top of the script to enable generation.</span></div>` : ''}
+    <div class="vision-stage">${stage}</div>
+    <form class="chat-form" id="visionForm">
+      <input class="text-input" name="text" placeholder="DESCRIBE GARMENT…" autocomplete="off"
+             aria-label="Garment description" ${(!online || state.visionBusy) ? 'disabled' : ''}>
+      <button class="send-btn" type="submit" style="padding-inline:1.25rem;font-size:10px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;"
+              ${(!online || state.visionBusy) ? 'disabled' : ''}>${state.visionBusy ? '…' : 'Generate'}</button>
+    </form>
+  </div>`;
+}
+
+function drawerFooterHTML() {
+  if (state.drawer === 'CART' && state.cart.length) {
+    return `<div class="total-row"><span>Total</span><span>$${cartTotal().toLocaleString()}</span></div>
+      <button class="checkout-btn" data-action="checkout"><i data-lucide="chevron-right"></i> Checkout Now</button>`;
+  }
+  if (state.drawer === 'AI ASSISTANT' || state.drawer === 'VISION LAB') {
+    const online = Boolean(CONFIG.apiKey) && CONFIG.apiKey !== 'PASTE_YOUR_KEY_HERE';
+    return `<div class="status-line"><span class="status-dot ${online ? 'online' : 'offline'}"></span>
+      Neural Link · ${online ? 'Online' : 'Key Missing'}</div>`;
+  }
+  return `<p class="legal-note">LGPSM © 2026 — Future Forward Fashion</p>`;
+}
+
+/* ═══ 7 · AI — ASSISTANT ═══ */
+async function sendMessage(rawText) {
+  const text = (rawText || '').trim();
+  if (!text || state.aiBusy) return;
+  state.chat.push({ role: 'user', parts: [{ text }] });
+  state.aiBusy = true;
+  renderDrawer();
+
+  state.chatCtrl?.abort();
+  const ctrl = new AbortController();
+  state.chatCtrl = ctrl;
+
+  try {
+    const data = await gemini(CONFIG.chatModel, {
+      contents: state.chat,
+      systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+      generationConfig: { temperature: 0.7, maxOutputTokens: 220 },
+    }, ctrl.signal);
+    const reply = data.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join(' ')
+      || 'No response generated.';
+    state.chat.push({ role: 'model', parts: [{ text: reply }] });
+  } catch (err) {
+    if (err.name !== 'AbortError') {
+      state.chat.push({ role: 'model', parts: [{ text: '⚠ ' + (err.message || 'Request failed.') }] });
+      toast('AI request failed.', 'err');
+    }
+  } finally {
+    state.aiBusy = false;
+    if (state.drawer === 'AI ASSISTANT') renderDrawer();
+  }
+}
+
+/* ═══ 8 · AI — VISION LAB ═══ */
+async function generateConcept(rawText) {
+  const text = (rawText || '').trim();
+  if (!text || state.visionBusy) return;
+  state.visionBusy = true;
+  renderDrawer();
+
+  state.visionCtrl?.abort();
+  const ctrl = new AbortController();
+  state.visionCtrl = ctrl;
+
+  try {
+    const data = await gemini(CONFIG.imageModel, {
+      contents: [{ role: 'user', parts: [{ text: `${VISION_PROMPT} ${text}` }] }],
+      generationConfig: { responseModalities: ['IMAGE'], imageConfig: { aspectRatio: '3:4' } },
+    }, ctrl.signal);
+    const part = data?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+    if (!part) throw new Error('Model returned no image — try a more visual description.');
+    state.visionImage = `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
+    toast('Concept ready.');
+  } catch (err) {
+    if (err.name !== 'AbortError') toast(err.message || 'Concept generation failed.', 'err');
+  } finally {
+    state.visionBusy = false;
+    if (state.drawer === 'VISION LAB') renderDrawer();
+  }
+}
+
+/* ═══ 9 · CHECKOUT ═══ */
+async function checkout() {
+  const btn = $('[data-action="checkout"]');
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<i data-lucide="loader-2" class="spinner"></i> Processing…';
+    refreshIcons();
+  }
+  await new Promise(r => setTimeout(r, 1100)); // simulate payment intent
+  const orderId = `LGPSM-${Math.floor(1000 + Math.random() * 9000)}`;
+  state.cart = [];
+  saveCart(); updateCartBadge();
+  closeDrawer();
+  toast(`Order ${orderId} confirmed.`);
+}
+
+/* ═══ 10 · MOBILE MENU & NAVIGATION ═══ */
+function renderMobileMenu() {
+  $('#mobileNav').innerHTML = NAV.map(l => l.href
+    ? `<button data-nav="${l.href.slice(1)}">${l.label} <i data-lucide="chevron-right"></i></button>`
+    : `<button data-drawer="${l.drawer}">${l.label} <i data-lucide="chevron-right"></i></button>`
+  ).join('');
+}
+function openMobileMenu() {
+  $('#mobileMenu').hidden = false;
+  $('#menuBtn').setAttribute('aria-expanded', 'true');
+  updateLock();
+}
+function closeMobileMenu() {
+  $('#mobileMenu').hidden = true;
+  $('#menuBtn').setAttribute('aria-expanded', 'false');
+  updateLock();
+}
+function scrollToSection(id) {
+  closeMobileMenu();
+  closeDrawer();
+  requestAnimationFrame(() =>
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  );
+}
+
+/* ═══ 11 · STATIC SECTION RENDERERS ═══ */
+function renderSections() {
+  $('#projectsGrid').innerHTML = PROJECTS.map((p, i) => `
+    <a class="project-card corners" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer" data-reveal style="--reveal-delay:${i * 90}ms">
+      <div>
+        <div class="project-meta"><span>0${i + 1} // DEPLOYED</span><span>${p.year}</span></div>
+        <h3 class="project-title">${esc(p.title)}</h3>
+        <p class="project-desc">${esc(p.desc)}</p>
+      </div>
+      <div class="project-foot">
+        <div class="tech-tags">${p.tech.map(t => `<span class="tech-tag">${esc(t)}</span>`).join('')}</div>
+        <i data-lucide="arrow-up-right" class="card-arrow"></i>
+      </div>
+    </a>`).join('');
+
+  $('#templatesGrid').innerHTML = TEMPLATES.map((t, i) => `
+    <div class="template-card" data-reveal style="--reveal-delay:${(i % 2) * 80}ms">
+      <div style="min-width:0;padding-right:1rem;">
+        <span class="template-type">${esc(t.type)}</span>
+        <h4 class="template-name">${esc(t.name)}</h4>
+        <p class="template-desc">${esc(t.desc)}</p>
+      </div>
+      <button class="template-btn" aria-label="Open ${esc(t.name)}"><i data-lucide="arrow-up-right"></i></button>
+    </div>`).join('');
+
+  $('#journalList').innerHTML = JOURNAL.map((p, i) => `
+    <article class="journal-row" data-reveal style="--reveal-delay:${i * 90}ms">
+      <div style="display:flex;align-items:baseline;gap:1.5rem;">
+        <span class="journal-date">${esc(p.date)}</span>
+        <h3 class="journal-title">${esc(p.title)}</h3>
+      </div>
+      <span class="journal-meta">${esc(p.read)} <i data-lucide="arrow-up-right" style="width:14px;height:14px;"></i></span>
+    </article>`).join('');
+
+  $('#tickerTrack').innerHTML = [...TICKER, ...TICKER]
+    .map(t => `<span class="ticker-item">${esc(t)}</span>`).join('');
+}
+
+/* ═══ 12 · SCROLL REVEAL ═══ */
+function initReveal() {
+  const els = $$('[data-reveal]');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('is-revealed'));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add('is-revealed'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => io.observe(el));
+}
+
+/* ═══ 13 · CURSOR-REVEAL BACKGROUND ═══
+   CSS mask positioned via custom properties — no canvas, no toDataURL,
+   smooth easing with a single rAF loop that pauses when the tab hides. */
+function initBackground() {
+  const root = $('#bgReveal');
+  if (!root) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; // static, centered
+
+  let tx = .5, ty = .5, x = .5, y = .5, raf = 0, running = true;
+
+  window.addEventListener('mousemove', e => {
+    tx = e.clientX / window.innerWidth;
+    ty = e.clientY / window.innerHeight;
+  }, { passive: true });
+
+  const tick = () => {
+    if (!running) return;
+    x += (tx - x) * 0.075;
+    y += (ty - y) * 0.075;
+    root.style.setProperty('--mx', (x * 100).toFixed(3) + '%');
+    root.style.setProperty('--my', (y * 100).toFixed(3) + '%');
+    raf = requestAnimationFrame(tick);
+  };
+
+  document.addEventListener('visibilitychange', () => {
+    cancelAnimationFrame(raf);
+    if (!document.hidden && running) raf = requestAnimationFrame(tick);
+  });
+
+  raf = requestAnimationFrame(tick);
+}
+
+/* ═══ 14 · GLOBAL EVENT DELEGATION ═══ */
+document.addEventListener('click', e => {
+  const nav = e.target.closest('[data-nav]');
+  if (nav) return scrollToSection(nav.dataset.nav);
+
+  const drw = e.target.closest('[data-drawer]');
+  if (drw) return openDrawer(drw.dataset.drawer);
+
+  const act = e.target.closest('[data-action]');
+  if (!act) return;
+  switch (act.dataset.action) {
+    case 'top':        window.scrollTo({ top: 0, behavior: 'smooth' }); break;
+    case 'open-menu':  openMobileMenu(); break;
+    case 'close-menu': closeMobileMenu(); break;
+    case 'close-drawer': closeDrawer(); break;
+    case 'add':        addToCart(SHOP_ITEMS.find(i => i.id === act.dataset.id)); break;
+    case 'inc':        changeQty(act.dataset.id, +1); break;
+    case 'dec':        changeQty(act.dataset.id, -1); break;
+    case 'remove':     removeFromCart(act.dataset.id); break;
+    case 'browse':     openDrawer('SHOP'); break;
+    case 'suggest':    sendMessage(act.dataset.text); break;
+    case 'clear-chat': state.chat = []; renderDrawer(); break;
+    case 'checkout':   checkout(); break;
+  }
+});
+
+document.addEventListener('submit', e => {
+  e.preventDefault();
+  if (e.target.id === 'chatForm')   sendMessage(new FormData(e.target).get('text'));
+  if (e.target.id === 'visionForm') generateConcept(new FormData(e.target).get('text'));
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if (state.drawer) closeDrawer();
+  else closeMobileMenu();
+});
+
+/* ═══ 15 · INIT ═══ */
+(function init() {
+  state.cart = loadCart();
+  updateCartBadge();
+  renderSections();
+  renderMobileMenu();
+  refreshIcons();
+  initReveal();
+  initBackground();
+})();
+</script>
+</body>
 </html>
